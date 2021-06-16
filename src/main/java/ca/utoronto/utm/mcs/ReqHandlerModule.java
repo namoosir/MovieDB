@@ -1,6 +1,7 @@
 package ca.utoronto.utm.mcs;
 
 import dagger.Module;
+import dagger.Provides;
 
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
@@ -11,7 +12,7 @@ public class ReqHandlerModule {
     // TODO Complete This Module
 
     @Provides
-    public Neo4jDAO provideNeo4jDAO(){
+    public Neo4jDAO provideNeo4jDAO(){  //does this count as injection?
         String uriDb = "bolt://localhost:7687";
         Driver driver = GraphDatabase.driver(uriDb, AuthTokens.basic("neo4j","1234"));
 

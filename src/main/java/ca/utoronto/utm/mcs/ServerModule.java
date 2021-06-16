@@ -20,7 +20,13 @@ public class ServerModule {
     } */
 
     @Provides
-    public HttpServer provideServer() {
-        return HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
+    public HttpServer provideServer(){
+        try {
+			return HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
     }
+    
 }

@@ -1,6 +1,5 @@
 package ca.utoronto.utm.mcs;
 
-import org.neo4j.driver;
 import ca.utoronto.utm.mcs.Exception400;
 import ca.utoronto.utm.mcs.Exception404;
 import ca.utoronto.utm.mcs.Exception500;
@@ -15,16 +14,16 @@ import org.neo4j.driver.GraphDatabase;
 public class Neo4jDAO {
     // TODO Complete This Class
     private Driver driver;
-    private String uriUser;
+    //private String uriUser;
 
     public Neo4jDAO(Driver driver){
         this.driver = driver;
-        this.uriUser ="http://localhost:8080";
+        //this.uriUser ="http://localhost:8080";
     }
 
-    public String geturiUser(){
+  /*   public String geturiUser(){
         return uriUser;
-    }
+    } */
     
     public void addActor(String name, String id) throws Exception400, Exception500{
 
@@ -43,31 +42,31 @@ public class Neo4jDAO {
     //doesRelaExist
 
     public String getActor(String Id) {
-
+        return null;
     }
 
     public String hasRelationship(String movieId, String actorId) {
-
+        return null;
     }
 
     public String computeBaconNumber(String id) {
-
+        return null;
     }
 
     public String computeBacomPath(String id) {
-        
+        return null;
     }
 
-    private boolean doesActorIDExist(string id) {
-        
+    private boolean doesActorIDExist(String id) {
+        return false;
     }
 
-    private boolean doesMovieIDExist(string id) {
-
+    private boolean doesMovieIDExist(String id) {
+        return false;
     }
 
-    private boolean doesRelationshipExist(string actorId, string movieId) {
-
+    private boolean doesRelationshipExist(String actorId, String movieId) {
+        return false;
     }
 
     
