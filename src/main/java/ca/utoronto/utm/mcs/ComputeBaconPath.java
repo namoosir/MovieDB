@@ -21,6 +21,18 @@ import com.sun.net.httpserver.HttpHandler;
 import java.time.Instant;
 
 public class ComputeBaconPath{
+    
+    private Neo4jDAO database;
+    private HttpExchange exchange;
+
+    public ComputeBaconPath(Neo4jDAO database, HttpExchange exchange) {
+        this.database = database;
+        this.exchange = exchange;
+    }
+
+    public void handle() {
+
+    }
 
     
 }

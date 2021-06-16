@@ -20,61 +20,58 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.time.Instant;
 
-public class HasRelationship {
+public class Add {
+    Neo4jDAO database;
+    HttpExchange exchange;
+    private String field1;
+    private String field2;
+    public boolean failed = false;
 
-    private Neo4jDAO database;
-    private HttpExchange exchange;
-
-    public HasRelationship(Neo4jDAO database, HttpExchange exchange) {
+    public Add(Neo4jDAO database, HttpExchange exchange, String field1, String field2) {
         this.database = database;
         this.exchange = exchange;
+        this.field1 = field1;
+        this.field2 = field2;
     }
-
-    public void handle() {
+    
+    public void addHandle(){
         try {
-            if (exchange.getRequestMethod().equals("PUT")) {
-                handleGet();
-            } else {
+            if (!exchange.getRequestMethod().equals("PUT")) {
                 sendStatusCode(404);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }  
     }
 
-    private void handleGet() throws IOException, JSONException {
+    String[] addHandlePut() throws JSONException{
         String body;
-        JSONObject jsonBody = null;
-        String actorId;
-        String movieId;
+        JSONObject jsonBody = null; 
 
         try {
             body = Utils.convert(exchange.getRequestBody());
             jsonBody = new JSONObject(body);
         } catch (Exception e) {
             sendStatusCode(400);
-            return;
+            return null;
         }
 
-        if (!(jsonBody.has("actorId") || jsonBody.has("movieId"))) {
+        if (!(jsonBody.has(field1) || jsonBody.has(field2))){
             sendStatusCode(400);
-            return;
+            return null;
         }
-
-        actorId = jsonBody.getString("actorId");
-        movieId = jsonBody.getString("movieId");
-
-        try {
-            database.addRelationship(actorId, movieId);
-        } catch (StatusException e) {
-            sendStatusCode(e.getStatus());
-            return;
-        }
-
-        sendStatusCode(200);
+        
+        String[] s = {jsonBody.getString(field1), jsonBody.getString(field2)};
+        return s;
     }
 
-    private void sendStatusCode(int code) throws IOException {
-        exchange.sendResponseHeaders(code, -1);
-    }    
+    void sendStatusCode(int code){
+        failed = true;
+        try {
+            exchange.sendResponseHeaders(code, -1);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

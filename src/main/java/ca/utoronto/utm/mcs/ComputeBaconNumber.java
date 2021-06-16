@@ -22,5 +22,16 @@ import java.time.Instant;
 
 public class ComputeBaconNumber  {
 
+    private Neo4jDAO database;
+    private HttpExchange exchange;
+
+    public ComputeBaconNumber(Neo4jDAO database, HttpExchange exchange) {
+        this.database = database;
+        this.exchange = exchange;
+    }
+
+    public void handle() {
+    }
+
     
 }

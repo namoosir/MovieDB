@@ -20,10 +20,11 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.time.Instant;
 
-public class AddActor extends Add{
+public class AddMovie extends Add{
 
-    public AddActor(Neo4jDAO database, HttpExchange exchange){
-        super(database, exchange, "name", "actorId");
+    
+    public AddMovie(Neo4jDAO database, HttpExchange exchange){
+        super(database, exchange, "name", "movieId");
     }
 
     public void handle() {
@@ -45,11 +46,12 @@ public class AddActor extends Add{
         if(super.failed) return;
 
         try{
-            database.addActor(input[0], input[1]);
+            database.addMovie(input[0], input[1]);
         } catch(StatusException e){
             super.sendStatusCode(e.getStatus());
             return;
         }
         super.sendStatusCode(200);
     }
+
 }

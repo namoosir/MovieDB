@@ -25,15 +25,15 @@ public class Neo4jDAO {
         return uriUser;
     } */
     
-    public void addActor(String name, String id) throws Exception400, Exception500{
+    public void addActor(String name, String id) throws StatusException{
 
     }
 
-    public void addMovie(String name, String id) throws Exception400, Exception500{
+    public void addMovie(String name, String id) throws StatusException{
         
     }
 
-    public void addRelationship(String actorId, String movieId) throws Exception400, Exception500, Exception404{
+    public void addRelationship(String actorId, String movieId) throws StatusException{
         
     }
     //all the 
@@ -41,27 +41,27 @@ public class Neo4jDAO {
     //doesMovieIDExist
     //doesRelaExist
 
-    public String getActor(String Id) {
+    public String getActor(String Id) throws StatusException {
         return null;
     }
 
-    public String hasRelationship(String movieId, String actorId) {
+    public String hasRelationship(String movieId, String actorId) throws StatusException {
         return null;
     }
 
-    public String computeBaconNumber(String id) {
+    public String computeBaconNumber(String id) throws StatusException{
         return null;
     }
 
-    public String computeBacomPath(String id) {
+    public String computeBacomPath(String id) throws StatusException{
         return null;
     }
 
-    private boolean doesActorIDExist(String id) {
+    private boolean doesActorIDExist(String id)  {
         return false;
     }
 
-    private boolean doesMovieIDExist(String id) {
+    private boolean doesMovieIDExist(String id)  {
         return false;
     }
 
