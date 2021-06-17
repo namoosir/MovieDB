@@ -7,61 +7,67 @@ import ca.utoronto.utm.mcs.Exception500;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
- 
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Session;
+import org.neo4j.driver.Result;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.Transaction;
+import static org.neo4j.driver.Values.parameters;
 
-// All your database transactions or queries should 
-// go in this class
+
 public class Neo4jDAO {
     // TODO Complete This Class
     private Driver driver;
-    //private String uriUser;
+    // private String uriUser;
 
-    public Neo4jDAO(Driver driver){
+    public Neo4jDAO(Driver driver) {
         this.driver = driver;
-        //this.uriUser ="http://localhost:8080";
+        // this.uriUser ="http://localhost:8080";
     }
 
-  /*   public String geturiUser(){
-        return uriUser;
-    } */
-    
-    public void addActor(String name, String id) throws Exception400, Exception500{
+    /*
+     * public String geturiUser(){ return uriUser; }
+     */
+
+    public void addActor(String name, String id) throws StatusException {
+
 
     }
 
-    public void addMovie(String name, String id) throws Exception400, Exception500{
-        
+    public void addMovie(String name, String id) throws StatusException {
+
     }
 
-    public void addRelationship(String actorId, String movieId) throws Exception400, Exception500, Exception404{
-        
-    }
-    //all the 
-    //doesActorIDExist
-    //doesMovieIDExist
-    //doesRelaExist
+    public void addRelationship(String actorId, String movieId) throws StatusException {
 
-    public String getActor(String Id) {
+    }
+    // all the
+    // doesActorIDExist
+    // doesMovieIDExist
+    // doesRelaExist
+
+    public String getActor(String Id) throws StatusException {
         return null;
     }
 
-    public String hasRelationship(String movieId, String actorId) {
+    public String hasRelationship(String movieId, String actorId) throws StatusException {
         return null;
     }
 
-    public String computeBaconNumber(String id) {
+    public String computeBaconNumber(String id) throws StatusException {
         return null;
     }
 
-    public String computeBacomPath(String id) {
+    public String computeBacomPath(String id) throws StatusException {
         return null;
     }
 
-    private boolean doesActorIDExist(String id) {
+    private boolean actorIDExist(String id, Session session) {
         return false;
     }
 
-    private boolean doesMovieIDExist(String id) {
+    private boolean doesMovieIDExist(String id, Session session) {
+
         return false;
     }
 
@@ -69,10 +75,10 @@ public class Neo4jDAO {
         return false;
     }
 
-    
-
 }
 
-/*     public static String uriDb = "bolt://localhost:7687";
-    public static String uriUser ="http://localhost:8080";
-    public static Driver driver = GraphDatabase.driver(uriDb, AuthTokens.basic("neo4j","1234")); */
+/*
+ * public static String uriDb = "bolt://localhost:7687"; public static String
+ * uriUser ="http://localhost:8080"; public static Driver driver =
+ * GraphDatabase.driver(uriDb, AuthTokens.basic("neo4j","1234"));
+ */
