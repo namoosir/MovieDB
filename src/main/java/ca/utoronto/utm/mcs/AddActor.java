@@ -20,6 +20,12 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.time.Instant;
 
+//PUT /api/v1/addActor
+//@param: name String, actorId string
+//@return:
+//- 200 OK: Actor added successfully
+//- 400 BAD REQUEST: If name/actorId are improperly formatted
+//- 500 INTERNAL SERVER ERROR: If an error occurred during a database operation
 public class AddActor extends Add{
 
     public AddActor(Neo4jDAO database, HttpExchange exchange){
