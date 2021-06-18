@@ -20,60 +20,50 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.time.Instant;
 
-public class GetActor {
+public class GetActor extends Get{
 
-    private Neo4jDAO database;
-    private HttpExchange exchange;
+    static String[] fields = {"actorId"};
+    String response;
     
-    public GetActor(Neo4jDAO database, HttpExchange exchange) {
-        this.database = database;
-        this.exchange = exchange;
+    public GetActor(Neo4jDAO database, HttpExchange exchange)  {
+        super(database, exchange, fields);
     }
 
     public void handle() {
         try {
-            if (exchange.getRequestMethod().equals("GET")) {
-                handleGet();
-            } else {
-                sendStatusCode(404);
-            }
-        } catch (Exception e) {
+            super.getHandle();
+            if(super.failed) return;
+            handleGet();
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void handleGet() throws JSONException {
+        String input[];
 
-    private void handleGet() throws IOException, JSONException {
-        String body;
-        JSONObject jsonBody = null; 
-        String actorName;
-        String actorId;
-
-        try {
-            body = Utils.convert(exchange.getRequestBody());
-            jsonBody = new JSONObject(body);
-        } catch (Exception e) {
-            sendStatusCode(400);
-            return;
-        }
-
-        if (!(jsonBody.has("actorId"))){
-            sendStatusCode(400);
-            return;
-        }
-
-        actorId = jsonBody.getString("actorId");
+        input = super.getHandleGet();
+        
+        if(super.failed) return;
 
         try{
-            database.getActor(actorId);
+            response = database.getActor(input[0]);
         } catch(StatusException e){
-            sendStatusCode(e.getStatus());
+            super.sendStatusCode(e.getStatus());
             return;
         }
+
+        try{
+            exchange.sendResponseHeaders(200, response.length());
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }catch(Exception e){
+            super.sendStatusCode(400);
+            return;
+        }
+
     }
     
-
-    private void sendStatusCode(int code) throws IOException {
-        exchange.sendResponseHeaders(code, -1);
-    }
 }

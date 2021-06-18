@@ -6,6 +6,10 @@ import java.net.URI;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import java.io.OutputStream;
+import org.json.*;
+
+
 
 public class ReqHandler implements HttpHandler {
 
@@ -22,40 +26,61 @@ public class ReqHandler implements HttpHandler {
        URI path = exchange.getRequestURI();
       // System.out.println(path.toString()); //returns /api/v1/asdasdasd
 
-       String[] baseName = path.toString().split("/");
+/*        String response = "";
+       JSONObject jsonBody = new JSONObject();  
+       //exchange.sendResponseHeaders(200, -1);
+       try{
+        jsonBody.put("id", "123");
+        response = jsonBody.toString();}
+       catch (Exception e){
+        System.out.printf("Server started on 1\n");
+       }
+       System.out.printf("Server started on 2 %s\n", response);
+       try{
+ 
+        System.out.printf("Server started on 3 %s\n", response);
+        exchange.sendResponseHeaders(200, response.length());
+        OutputStream os = exchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+        exchange.sendResponseHeaders(400, -1);
+    }catch(Exception e){
+        exchange.sendResponseHeaders(400, -1);
+        return;
+    } */
 
-       switch (baseName[baseName.length - 1]) {
-           case "addActor":
+        switch (path.toString()) {
+           case "/api/v1/addActor":
                AddActor addActor = new AddActor(database, exchange);
                addActor.handle();
                break;
-           case "addMovie":
+           case "/api/v1/addMovie":
                AddMovie addMovie = new AddMovie(database, exchange);
                addMovie.handle();
                break;
-           case "addRelationship":
+           case "/api/v1/addRelationship":
                AddRelationship addRelationship = new AddRelationship(database, exchange);
                addRelationship.handle();
                break;
-           case "getActor":
+           case "/api/v1/getActor":
                GetActor getActor = new GetActor(database, exchange);
                getActor.handle();
                break;
-           case "hasRelationship":
+           case "/api/v1/hasRelationship":
                HasRelationship hasRelationship = new HasRelationship(database, exchange);
                hasRelationship.handle();
                break;
-           case "computeBaconNumber":
+           case "/api/v1/computeBaconNumber":
                ComputeBaconNumber computeBaconNumber = new ComputeBaconNumber(database, exchange);
                computeBaconNumber.handle();
                break;
-           case "computeBaconPath":
+           case "/api/v1/computeBaconPath":
                ComputeBaconPath computeBaconPath = new ComputeBaconPath(database, exchange);
                computeBaconPath.handle();
                break;
            default:
                // code block
                // error
-       }
+       } 
     }
 }

@@ -37,7 +37,7 @@ public class Add {
     public void addHandle(){
         try {
             if (!exchange.getRequestMethod().equals("PUT")) {
-                sendStatusCode(404);
+                sendStatusCode(400);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class Add {
             return null;
         }
 
-        if (!(jsonBody.has(field1) || jsonBody.has(field2))){
+        if (!(jsonBody.has(field1) && jsonBody.has(field2))){
             sendStatusCode(400);
             return null;
         }

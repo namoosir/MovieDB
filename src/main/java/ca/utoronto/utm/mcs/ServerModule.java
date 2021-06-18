@@ -19,14 +19,15 @@ public class ServerModule {
         this.port = port;
     } */
 
+    private HttpServer server;
     @Provides
     public HttpServer provideServer(){
         try {
-			return HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
+			server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return server;
     }
     
 }

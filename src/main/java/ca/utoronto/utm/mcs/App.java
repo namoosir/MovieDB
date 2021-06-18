@@ -13,22 +13,19 @@ public class App
     public static void main(String[] args) throws IOException
     {
         // TODO Create Your Server Context Here, There Should Only Be One Context
-        //ServerComponent component = DaggerServerComponent.create();
+        ServerComponent component = DaggerServerComponent.create();
 
-       // Server server = component.buildServer();
-        //server.getServer().start();
+        Server server = component.buildServer();
+        server.getServer().start();
 
         ReqHandlerComponent component2 = DaggerReqHandlerComponent.create();
        
         ReqHandler handle = component2.buildHandler();
 
-        //server.getServer().createContext("/", handle);
-        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", port), 0);
-        server.start();
-        server.createContext("/api/v1", handle);
+        server.getServer().createContext("/api/v1", handle);
 
     	System.out.printf("Server started on port %d\n", port);
     }
 }
 //depenecy should be passed to the class that needs them (usually through constructor
-//add @inject into classed want injected
+//add @inject into classed want injected2

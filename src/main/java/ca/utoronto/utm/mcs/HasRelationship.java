@@ -20,61 +20,50 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.time.Instant;
 
-public class HasRelationship {
+public class HasRelationship extends Get{
 
-    private Neo4jDAO database;
-    private HttpExchange exchange;
-
-    public HasRelationship(Neo4jDAO database, HttpExchange exchange) {
-        this.database = database;
-        this.exchange = exchange;
+    static String[] field = {"actorId", "movieId"};
+    String response;
+    
+    public HasRelationship(Neo4jDAO database, HttpExchange exchange)  {
+        super(database, exchange, field);
     }
 
     public void handle() {
         try {
-            if (exchange.getRequestMethod().equals("PUT")) {
-                handleGet();
-            } else {
-                sendStatusCode(404);
-            }
-        } catch (Exception e) {
+            super.getHandle();
+            if(super.failed) return;
+            handleGet();
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void handleGet() throws IOException, JSONException {
-        String body;
-        JSONObject jsonBody = null;
-        String actorId;
-        String movieId;
+    private void handleGet() throws JSONException {
+        String input[];
 
-        try {
-            body = Utils.convert(exchange.getRequestBody());
-            jsonBody = new JSONObject(body);
-        } catch (Exception e) {
-            sendStatusCode(400);
+        input = super.getHandleGet();
+        
+        if(super.failed) return;
+
+        try{
+            response = database.hasRelationship(input[0], input[1]);
+        } catch(StatusException e){
+            super.sendStatusCode(e.getStatus());
             return;
         }
-
-        if (!(jsonBody.has("actorId") || jsonBody.has("movieId"))) {
-            sendStatusCode(400);
+        
+        try{
+            exchange.sendResponseHeaders(200, response.length());
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }catch(Exception e){
+            super.sendStatusCode(400);
             return;
         }
-
-        actorId = jsonBody.getString("actorId");
-        movieId = jsonBody.getString("movieId");
-
-        try {
-            database.addRelationship(actorId, movieId);
-        } catch (StatusException e) {
-            sendStatusCode(e.getStatus());
-            return;
-        }
-
-        sendStatusCode(200);
+        
     }
-
-    private void sendStatusCode(int code) throws IOException {
-        exchange.sendResponseHeaders(code, -1);
-    }    
+     
 }
