@@ -23,5 +23,3 @@ public class App
     	System.out.printf("Server started on port %d\n", port);
     }
 }
-//depenecy should be passed to the class that needs them (usually through constructor
-//add @inject into classed want injected2

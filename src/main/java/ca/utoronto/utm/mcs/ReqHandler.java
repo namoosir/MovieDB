@@ -17,6 +17,11 @@ public class ReqHandler implements HttpHandler {
         this.database = database;
     }
 
+    /**
+     * Calls the correct handler for the API
+    @throws IOException
+    @param database instance of Neo4jDAO object storing the database
+    */ 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
        URI path = exchange.getRequestURI();

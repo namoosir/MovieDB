@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import org.json.*;
 import com.sun.net.httpserver.HttpExchange;
 
+/**
+ * PUT /api/v1/get{something}
+    @throws JSONException
+    @param database instance of Neo4jDAO object storing the database
+    @param exchange instance of HttpExchange storing the request information
+    @param fields String array of fields to be parsed 
+    @return:
+        List of strings for database use
+        - 400 BAD REQUEST: If name/actorId are improperly formatted
+ */ 
 public class Get {
 
     Neo4jDAO database;

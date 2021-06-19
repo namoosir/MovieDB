@@ -16,7 +16,6 @@ public class Neo4jDAO {
         this.driver = driver;
     }
 
-    //add exepction check when you do session.run??
     public void addActor(String name, String id) throws StatusException {
         Session session = null;
         try {

@@ -10,7 +10,6 @@ public class Server {
     @Inject
     public Server(HttpServer server){
         this.server = server;
-        //server.start();
     }
     
     public HttpServer getServer(){

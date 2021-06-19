@@ -4,7 +4,16 @@ import java.io.OutputStream;
 import org.json.*;
 import com.sun.net.httpserver.HttpExchange;
 
-
+/**
+ * PUT /api/v1/getActor
+    @throws JSONException
+    @param database instance of Neo4jDAO object storing the database
+    @param exchange instance of HttpExchange storing the request information
+    @return:
+    - 200 OK: Actor added successfully
+    - 400 BAD REQUEST: If name/actorId are improperly formatted
+    - 500 INTERNAL SERVER ERROR: If an error occurred during a database operation  
+ */ 
 public class GetActor extends Get{
 
     static String[] fields = {"actorId"};
