@@ -35,7 +35,7 @@ public class Get {
 
     public void getHandle(){
         try {
-            if (!exchange.getRequestMethod().equals("GET")) {
+            if (!exchange.getRequestMethod().equals("GET") && !exchange.getRequestMethod().equals("POST")) {
                 sendStatusCode(400);
             }
         } catch (Exception e) {

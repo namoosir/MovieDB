@@ -15,7 +15,7 @@ import org.json.*;
 public class ReqHandler implements HttpHandler {
 
     // TODO Complete This Class
-    private Neo4jDAO database;
+    public Neo4jDAO database;
 
     @Inject
     public ReqHandler(Neo4jDAO database) {

@@ -6,19 +6,8 @@ import com.sun.net.httpserver.HttpServer;
 import java.net.InetSocketAddress;
 import java.io.IOException;
 
-
-
-
 @Module
 public class ServerModule {
-    // TODO Complete This Module
-
-/*     private final int port;
-
-    public ServerModule(int port) {
-        this.port = port;
-    } */
-
     private HttpServer server;
     @Provides
     public HttpServer provideServer(){
@@ -28,6 +17,5 @@ public class ServerModule {
 			e.printStackTrace();
 		}
 		return server;
-    }
-    
+    }    
 }
