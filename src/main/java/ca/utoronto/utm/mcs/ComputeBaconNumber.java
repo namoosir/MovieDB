@@ -4,7 +4,6 @@ import java.io.OutputStream;
 import org.json.*;
 import com.sun.net.httpserver.HttpExchange;
 
-
 public class ComputeBaconNumber extends Get{
 
     static String[] fields = {"actorId"};
