@@ -6,15 +6,10 @@ import java.net.URI;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import java.io.OutputStream;
-import org.json.*;
-
-
 
 
 public class ReqHandler implements HttpHandler {
 
-    // TODO Complete This Class
     public Neo4jDAO database;
 
     @Inject
@@ -56,8 +51,6 @@ public class ReqHandler implements HttpHandler {
                computeBaconPath.handle();
                break;
            default:
-               // code block
-               // error
        } 
     }
 }

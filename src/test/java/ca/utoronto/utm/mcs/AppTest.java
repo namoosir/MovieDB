@@ -1,26 +1,19 @@
 package ca.utoronto.utm.mcs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.net.HttpURLConnection;
-import java.util.concurrent.TimeUnit;
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.*;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.neo4j.driver.AuthTokens;
-import org.neo4j.driver.Driver;
-import org.neo4j.driver.GraphDatabase;
 
-// TODO Please Write Your Tests For CI/CD In This Class. You will see
+
+// Please Write Your Tests For CI/CD In This Class. You will see
 // these tests pass/fail on github under github actions.
 public class AppTest {
     private static Server server;

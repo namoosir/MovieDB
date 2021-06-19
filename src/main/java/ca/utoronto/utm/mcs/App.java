@@ -2,10 +2,6 @@ package ca.utoronto.utm.mcs;
 
 import java.io.IOException;
 
-import com.sun.net.httpserver.HttpServer;
-import java.net.InetSocketAddress;
-
-
 public class App
 {
     static int port = 8080;
